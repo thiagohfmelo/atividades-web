@@ -21,6 +21,12 @@ body {
     color: white;
     margin: 0;
 }
+.box h2 {
+    color: white;
+}
+.resultBox {
+    color: white;
+}
 .add {
     color: white;
     background: none;

@@ -1,4 +1,11 @@
-function changeColor()
-{  
-    document.body.style.backgroundColor = `hsl(${Math.floor(301*Math.random())},100%,50%)`
+let sum = 0;
+
+function addNumber() {
+    const input = document.getElementById('numberInput');
+    const number = parseFloat(input.value);
+        if (!isNaN(number)) {
+            sum += number;
+            document.getElementById('sumDisplay').textContent = sum; 
+            input.value = '';
+    }
 }

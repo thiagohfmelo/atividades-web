@@ -9,8 +9,10 @@
 </head>
 <body style="background-color: white">
    <div class="box">
-    <h1> Número </h1> <input type="number"> <button class="add"> Adicionar</button>
-    <h2>Somatório: </h2> 
+    <h1> Número </h1> <input type="number" id="NumberInput" placeholder="Insira um número"> <button class="add" onclick="addNumber()">Adicionar</button>
+    <div class="resultado"> <strong>Somatório</strong>
+    <div class="resultBox" id="sumDisplay">0</div> 
+    </div>
    </div>
 </body>
 <script src="script.js"></script>
