@@ -7,25 +7,50 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
         }
         .container {
-            max-width: 600px;
-            margin: 0 auto;
+            background-color: rgb(43, 38, 43);
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         input[type="number"] {
             padding: 10px;
             font-size: 16px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 4px;
         }
         button {
             padding: 10px;
             font-size: 16px;
+            background-color: #6c757d;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #5a6268;
         }
         pre {
-            background-color: #f4f4f4;
+            background-color: #333;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #444;
             border-radius: 4px;
+            white-space: pre-wrap;
+        }
+        h1, h2 {
+            margin: 0 0 10px;
         }
     </style>
 </head>
@@ -53,10 +78,8 @@
             
             if (!isNaN(valor)) {
                 valores.push(valor);
-
                 atualizarValoresInseridos();
                 atualizarMediaValores();
-
                 input.value = '';
                 input.focus();
             } else {
