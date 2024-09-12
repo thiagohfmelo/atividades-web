@@ -45,24 +45,18 @@
     </div>
 
     <script>
-        // Vetor para armazenar os valores
         let valores = [];
 
         function adicionarValor() {
-            // Pega o valor do input
             const input = document.getElementById('numberInput');
             const valor = parseFloat(input.value);
             
-            // Verifica se o valor é um número válido
             if (!isNaN(valor)) {
-                // Adiciona o valor ao vetor
                 valores.push(valor);
 
-                // Atualiza os elementos PRE com os novos dados
                 atualizarValoresInseridos();
                 atualizarMediaValores();
 
-                // Limpa o campo de entrada
                 input.value = '';
                 input.focus();
             } else {
