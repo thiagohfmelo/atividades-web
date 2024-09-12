@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Valores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gerenciador de Valores</h1>
+        <input type="number" id="numberInput" placeholder="Digite um número">
+        <button onclick="adicionarValor()">Adicionar</button>
+        <div>
+            <h2>Valores Inseridos</h2>
+            <pre id="valoresInseridos">Nenhum valor adicionado ainda.</pre>
+        </div>
+        <div>
+            <h2>Média dos Valores</h2>
+            <pre id="mediaValores">A média será exibida aqui.</pre>
+        </div>
+    </div>
+
+    <script>
+        // Vetor para armazenar os valores
+        let valores = [];
+
+        function adicionarValor() {
+            // Pega o valor do input
+            const input = document.getElementById('numberInput');
+            const valor = parseFloat(input.value);
+            
+            // Verifica se o valor é um número válido
+            if (!isNaN(valor)) {
+                // Adiciona o valor ao vetor
+                valores.push(valor);
+
+                // Atualiza os elementos PRE com os novos dados
+                atualizarValoresInseridos();
+                atualizarMediaValores();
+
+                // Limpa o campo de entrada
+                input.value = '';
+                input.focus();
+            } else {
+                alert('Por favor, insira um valor numérico válido.');
+            }
+        }
+
+        function atualizarValoresInseridos() {
+            const valoresInseridos = document.getElementById('valoresInseridos');
+            if (valores.length === 0) {
+                valoresInseridos.textContent = 'Nenhum valor adicionado ainda.';
+            } else {
+                valoresInseridos.textContent = valores.join(', ');
+            }
+        }
+
+        function atualizarMediaValores() {
+            const mediaValores = document.getElementById('mediaValores');
+            if (valores.length === 0) {
+                mediaValores.textContent = 'A média será exibida aqui.';
+            } else {
+                const soma = valores.reduce((a, b) => a + b, 0);
+                const media = soma / valores.length;
+                mediaValores.textContent = media.toFixed(2);
+            }
+        }
+    </script>
+</body>
+</html>
