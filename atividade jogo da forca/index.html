@@ -67,6 +67,30 @@
         #newGame:hover {
             background-color: #0056b3;
         }
+
+        #lettersChosen {
+            margin-top: 2rem;
+            font-size: 1rem;
+        }
+
+        #lettersChosen h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        #lettersChosen ul {
+            list-style-type: none;
+            padding: 0;
+            font-size: 1.2rem;
+        }
+
+        #lettersChosen li {
+            display: inline;
+            margin-right: 0.5rem;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid #007bff;
+            border-radius: 0.3rem;
+            background-color: #e0e0e0;
+        }
     </style>
 </head>
 <body>
@@ -79,6 +103,11 @@
         </div>
         <div id="message"></div>
         <button id="newGame">Novo Jogo</button>
+        
+        <section id="lettersChosen">
+            <h2>Letras Escolhidas:</h2>
+            <ul id="chosenLettersList"></ul>
+        </section>
     </div>
     <script>
         const palavras = [
@@ -168,6 +197,17 @@
             }
 
             document.getElementById('message').textContent = '';
+            atualizarLetrasEscolhidas();
+        }
+
+        function atualizarLetrasEscolhidas() {
+            const chosenLettersList = document.getElementById('chosenLettersList');
+            chosenLettersList.innerHTML = '';
+            letrasEscolhidas.forEach(letra => {
+                const listItem = document.createElement('li');
+                listItem.textContent = letra;
+                chosenLettersList.appendChild(listItem);
+            });
         }
 
         function escolherLetra(letra) {
