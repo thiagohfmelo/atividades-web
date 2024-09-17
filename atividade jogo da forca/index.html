@@ -91,6 +91,13 @@
             border-radius: 0.3rem;
             background-color: #e0e0e0;
         }
+
+        #hangmanDrawing {
+            font-size: 1.5rem;
+            font-family: monospace;
+            white-space: pre;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -98,9 +105,7 @@
         <h1>Jogo da Forca</h1>
         <div id="wordDisplay"></div>
         <div id="alphabetButtons"></div>
-        <div id="hangmanImage">
-            <img id="hangmanImage" src="" alt="Forca" style="display: none;" />
-        </div>
+        <div id="hangmanDrawing"></div>
         <div id="message"></div>
         <button id="newGame">Novo Jogo</button>
         
@@ -172,6 +177,81 @@
 
         const MAX_TENTATIVAS = 6;
 
+        const bonecoForca = [
+            `
+  _______
+ |/      
+ |      
+ |      
+ |      
+ |      
+_|___
+            `,
+            `
+  _______
+ |/      |
+ |      
+ |      
+ |      
+ |      
+_|___
+            `,
+            `
+  _______
+ |/      |
+ |      O
+ |      
+ |      
+ |      
+_|___
+            `,
+            `
+  _______
+ |/      |
+ |      O
+ |      |
+ |      
+ |      
+_|___
+            `,
+            `
+  _______
+ |/      |
+ |      O
+ |     /|
+ |      
+ |      
+_|___
+            `,
+            `
+  _______
+ |/      |
+ |      O
+ |     /|\\
+ |      
+ |      
+_|___
+            `,
+            `
+  _______
+ |/      |
+ |      O
+ |     /|\\
+ |     / 
+ |      
+_|___
+            `,
+            `
+  _______
+ |/      |
+ |      O
+ |     /|\\
+ |     / \\
+ |      
+_|___
+            `
+        ];
+
         function iniciarJogo() {
             palavra = palavras[Math.floor(Math.random() * palavras.length)];
             letrasEscolhidas = new Set();
@@ -182,8 +262,7 @@
 
         function atualizarDisplay() {
             document.getElementById('wordDisplay').textContent = palavraOculta.split('').join(' ');
-            document.getElementById('hangmanImage').src = `images/forca${MAX_TENTATIVAS - tentativasRestantes}.png`;
-            document.getElementById('hangmanImage').style.display = (MAX_TENTATIVAS - tentativasRestantes) >= 0 ? 'block' : 'none';
+            document.getElementById('hangmanDrawing').textContent = bonecoForca[MAX_TENTATIVAS - tentativasRestantes];
             
             const alphabetButtons = document.getElementById('alphabetButtons');
             alphabetButtons.innerHTML = '';
