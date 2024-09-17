@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Forca</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        #wordDisplay {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        #alphabetButtons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .alphabet-button {
+            margin: 0.2rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        .alphabet-button:hover {
+            background-color: #e0e0e0;
+        }
+
+        #hangmanImage {
+            margin-bottom: 1rem;
+        }
+
+        #message {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        #newGame {
+            padding: 0.5rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #newGame:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Jogo da Forca</h1>
+        <div id="wordDisplay"></div>
+        <div id="alphabetButtons"></div>
+        <div id="hangmanImage">
+            <img id="hangmanImage" src="" alt="Forca" style="display: none;" />
+        </div>
+        <div id="message"></div>
+        <button id="newGame">Novo Jogo</button>
+    </div>
+    <script>
+        const palavras = [
+            // A
+            "abacaxi", "anel", "amigo", "ave", "abacate",
+            // B
+            "bola", "bala", "banho", "bau", "banco",
+            // C
+            "casa", "cachorro", "carro", "cafe", "cama",
+            // D
+            "dado", "dedo", "doce", "dia", "dente",
+            // E
+            "elefante", "estrela", "escola", "elo", "escada",
+            // F
+            "faca", "festa", "fogo", "foca", "fada",
+            // G
+            "gato", "galo", "gelo", "goma", "ganso",
+            // H
+            "helicoptero", "hipopotamo", "hotel", "harpa", "horta",
+            // I
+            "ilha", "iglu", "iris", "indio", "ima",
+            // J
+            "janela", "jarra", "jogo", "jumento", "joaninha",
+            // K
+            "ketchup", "kiwi", "karate", "koala", "kamikaze",
+            // L
+            "leao", "lago", "lua", "lima", "livro",
+            // M
+            "maca", "mala", "muro", "mapa", "mesa",
+            // N
+            "neve", "ninho", "navio", "nuvem", "nota",
+            // O
+            "olho", "ovo", "onda", "ouro", "orelha",
+            // P
+            "pato", "peixe", "pipoca", "pato", "perna",
+            // Q
+            "quilo", "quadro", "queijo", "quina", "queda",
+            // R
+            "raio", "rosa", "rede", "rato", "roupa",
+            // S
+            "sol", "sapo", "seda", "sabao", "sapato",
+            // T
+            "tigre", "touro", "teto", "tela", "tesoura",
+            // U
+            "uva", "urso", "urna", "uniao", "umidade",
+            // V
+            "vaca", "verao", "vento", "vela", "vidro",
+            // W
+            "webcam", "whisky", "waffle", "walker", "wifi",
+            // X
+            "xale", "xadrez", "xerox", "xarope", "xampu",
+            // Y
+            "yoga", "yakisoba", "yogurte", "yeti", "yuppie",
+            // Z
+            "zebra", "zoologico", "zumbi", "zero", "zagueiro"
+        ];
+
+        let palavra;
+        let letrasEscolhidas;
+        let palavraOculta;
+        let tentativasRestantes;
+
+        const MAX_TENTATIVAS = 6;
+
+        function iniciarJogo() {
+            palavra = palavras[Math.floor(Math.random() * palavras.length)];
+            letrasEscolhidas = new Set();
+            palavraOculta = palavra.replace(/[a-z]/g, '_');
+            tentativasRestantes = MAX_TENTATIVAS;
+            atualizarDisplay();
+        }
+
+        function atualizarDisplay() {
+            document.getElementById('wordDisplay').textContent = palavraOculta.split('').join(' ');
+            document.getElementById('hangmanImage').src = `images/forca${MAX_TENTATIVAS - tentativasRestantes}.png`;
+            document.getElementById('hangmanImage').style.display = (MAX_TENTATIVAS - tentativasRestantes) >= 0 ? 'block' : 'none';
+            
+            const alphabetButtons = document.getElementById('alphabetButtons');
+            alphabetButtons.innerHTML = '';
+            for (let i = 65; i <= 90; i++) {
+                const letra = String.fromCharCode(i).toLowerCase();
+                const button = document.createElement('button');
+                button.textContent = letra;
+                button.className = 'alphabet-button';
+                button.onclick = () => escolherLetra(letra);
+                alphabetButtons.appendChild(button);
+            }
+
+            document.getElementById('message').textContent = '';
+        }
+
+        function escolherLetra(letra) {
+            if (letrasEscolhidas.has(letra)) return;
+
+            letrasEscolhidas.add(letra);
+
+            if (palavra.includes(letra)) {
+                let novaPalavraOculta = '';
+                for (let i = 0; i < palavra.length; i++) {
+                    if (letrasEscolhidas.has(palavra[i])) {
+                        novaPalavraOculta += palavra[i];
+                    } else {
+                        novaPalavraOculta += '_';
+                    }
+                }
+                palavraOculta = novaPalavraOculta;
+                
+                if (palavraOculta === palavra) {
+                    document.getElementById('message').textContent = 'Você ganhou!';
+                }
+            } else {
+                tentativasRestantes--;
+                if (tentativasRestantes === 0) {
+                    document.getElementById('message').textContent = 'Você perdeu! A palavra era: ' + palavra;
+                }
+            }
+            
+            atualizarDisplay();
+        }
+
+        document.getElementById('newGame').addEventListener('click', iniciarJogo);
+
+        // Iniciar o jogo quando a página carrega
+        iniciarJogo();
+    </script>
+</body>
+</html>
