@@ -1,0 +1,59 @@
+header {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.controls {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.controls button {
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background: linear-gradient(45deg, #5500ff, #00d4ff);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.controls button:hover {
+    background: linear-gradient(45deg, #ff66ff, #66b2ff);
+}
+
+.game-area {
+    text-align: center;
+}
+
+.game-area input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background: #222;
+    color: white;
+}
+
+.game-log {
+    max-height: 250px;
+    overflow-y: auto;
+    margin: 1rem auto;
+    padding: 0.5rem;
+    background: #111;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.score {
+    text-align: center;
+    margin-top: 1rem;
+    color: white;
+}

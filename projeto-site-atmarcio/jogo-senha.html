@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulls and Cows</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/game.css">
+    <script src="js/game.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Bulls and Cows</h1>
+    </header>
+    <main>
+        <div class="controls">
+            <button id="back-button">Voltar à Página Inicial</button>
+            <button id="reveal-player-number">Revelar Meu Número</button>
+            <button id="reveal-machine-number">Revelar Número da Máquina</button>
+        </div>
+        
+        <div class="game-area">
+            <p>Seu número secreto foi gerado. Tente adivinhar o número da máquina!</p>
+            <input type="text" id="player-input" maxlength="4" placeholder="Seu palpite (4 dígitos)" />
+            <button id="submit-guess">Enviar</button>
+            <div id="game-log" class="game-log"></div>
+        </div>
+        <div class="score">
+            <p><strong>Placar:</strong> Você (Bulls): <span id="bulls-score">0</span> | Máquina (Cows): <span id="cows-score">0</span></p>
+        </div>
+    </main>
+    <footer>
+        <p>© 2024 Thiago Henrique</p>
+    </footer>
+</body>
+</html>

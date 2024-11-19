@@ -1,0 +1,14 @@
+main section {
+    text-align: center;
+    margin-top: 3rem;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
