@@ -1,17 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const timeElement = document.getElementById("current-time");
+    var timeDisplay = document.getElementById("time");
     const weatherElement = document.getElementById("weather");
 
-    async function fetchCurrentTime() {
-        try {
-            const response = await fetch("http://worldtimeapi.org/api/timezone/America/Sao_Paulo");
-            const data = await response.json();
-            const time = new Date(data.datetime).toLocaleTimeString("pt-BR");
-            timeElement.innerHTML = `<h3>Horário Atual</h3><p>${time}</p>`;
-        } catch (error) {
-            timeElement.innerHTML = `<h3>Horário Atual</h3><p>Erro ao carregar o horário.</p>`;
-        }
-    }
+   function refreshTime() {
+    const optionsDate = {
+        weekday: 'long', 
+        day: 'numeric', 
+        month: 'long', 
+        year: 'numeric',
+        timeZone: 'America/Sao_Paulo'
+    };
+
+    const optionsTime = {
+        hour: '2-digit',
+        minute: '2-digit', 
+        second: '2-digit',
+        timeZone: 'America/Sao_Paulo',
+    };
+
+    const date = new Date();
+    
+    const formattedDate = new Intl.DateTimeFormat('en-US', optionsDate).format(date);
+    const formattedTime = new Intl.DateTimeFormat('en-US', optionsTime).format(date);
+    
+    const formattedString = formattedDate.toLocaleLowerCase() + ' - ' + formattedTime
+    
+    timeDisplay.innerHTML = formattedString;
+}
+
+refreshTime()
+setInterval(refreshTime, 1000);
 
     async function fetchWeather() {
         try {
